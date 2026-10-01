@@ -1,0 +1,52 @@
+{% extends "accounts/base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1 class="greeting">Create your account</h1>
+
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+
+        <label>Email</label>
+        {{ form.email }}
+        {% for error in form.email.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+        <label>Username</label>
+        {{ form.username }}
+        {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+        <label>Password</label>
+        {{ form.password1 }}
+        {% for error in form.password1.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+        <label>Confirm Password</label>
+        {{ form.password2 }}
+        {% for error in form.password2.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+        <fieldset class="household-choice">
+            <legend>Family / Household</legend>
+
+            {% for radio in form.household_action %}
+                <label class="radio-option">{{ radio.tag }} {{ radio.choice_label }}</label>
+            {% endfor %}
+
+            <label>New household name</label>
+            {{ form.household_name }}
+            <p class="field-hint">{{ form.household_name.help_text }}</p>
+            {% for error in form.household_name.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+
+            <label>Invite code (if joining)</label>
+            {{ form.invite_code }}
+            <p class="field-hint">{{ form.invite_code.help_text }}</p>
+            {% for error in form.invite_code.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </fieldset>
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+
+    <p class="switch-auth">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "accounts/base.html" %}
+{% block title %}My Household{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>{{ household.name }}</h1>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-secondary">Log Out</button>
+        </form>
+    </div>
+
+    <h2>Household Members</h2>
+    <ul class="member-list">
+        {% for member in members %}
+            <li>
+                <span class="member-name">{{ member.user.username }}</span>
+                <span class="member-role">{{ member.get_role_display }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if is_owner %}
+    <div class="invite-box">
+        <p>Invite a family member with this code:</p>
+        <code class="invite-code">{{ household.invite_code }}</code>
+        <p class="field-hint">
+            They enter this on the sign-up page under
+            "Join an existing household."
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
