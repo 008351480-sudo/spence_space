@@ -68,3 +68,11 @@ def dashboard_view(request):
             "is_owner": profile.role == "owner",
         },
     )
+
+def home_view(request):
+    """
+    Temporary home page: send logged-in users to their dashboard and everyone else to the login page.
+    """
+    if request.user.is_authenticated:
+        return redirect("dashboard")
+    return redirect("login")
