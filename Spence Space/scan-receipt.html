@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <title>Scan Receipt</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h1>Spence Space</h1>
+ 
+        <nav class="navbar">
+            <a href="index.html">My Fridges</a>
+            <a href="discover.html">Discover</a>
+            <a href="grocery.html">Grocery List</a>
+            <a href="recipes.html">My Recipes</a>           
+        </nav>
+
+        <div class="receipt-section">
+            <h2>Scan Receipt</h2>
+
+            <p>Take a picture or upload a picture of your receipt.</p>
+
+            <form class="receipt-form">
+                    <label for="receipt-image">Upload Receipt:</label>
+
+                    <input 
+                        type="file"
+                        id="receipt-image"
+                        name="receipt-image"
+                        accept="image/*"
+                        capture="environment"
+                        required
+                    >
+
+                    <button type="submit">Continue</button>
+            </form>
+
+        </div>
+    </body>
+</html>
