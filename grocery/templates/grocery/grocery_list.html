@@ -1,0 +1,96 @@
+{% extends "accounts/base.html" %}
+{% block title %}Grocery List{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+
+    <h1>Grocery List</h1>
+
+    <p>Logged in as: {{ request.user.username }}</p>
+
+    <h2>Add Item</h2>
+
+    <form method="POST">
+        {%csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-primary">Add Item</button>
+    </form>
+
+    <h2>Items</h2>
+
+    <ul>
+        {% for item in items %}
+
+            <li>
+                {{ item.name }} - Quantity: {{ item.quantity }}
+
+                <form method="POST"
+                    action="{% url 'update_quantity' item.id %}"
+                    style="display: inline;">
+            
+                   {% csrf_token %}
+
+                   <input type="number"
+                          name="quantity"
+                          value="{{ item.quantity }}"
+                          min="1">
+
+                   <button type="submit">Change Quantity</button>
+                </form>
+
+                <form method="POST"
+                      action="{% url 'mark_bought' item.id %}"
+                      style="display: inline;">
+                    
+                    {% csrf_token %}
+
+                    <button type="submit">Bought</button>
+                </form>
+
+
+                <form method="POST"
+                      action="{% url 'remove_item' item.id %}"
+                      style="display: inline;">
+                    
+                    {% csrf_token %}
+
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+
+        {% empty %}
+
+            <li>No items in your grocery list.</li>
+
+        {% endfor %}
+    </ul>
+
+    <h2>Previously Bought</h2>
+
+    <ul>
+        {% for purchased_item in purchased_items %}
+
+            <li>
+                {{ purchased_item.name }} -
+                Quantity: {{ purchased_item.quantity }}
+
+                <form method="POST"
+                      action="{% url 'add_again' purchased_item.id %}"
+                      style="display: inline;">
+                    
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn-secondary">Add Again</button>
+                </form>
+            </li>
+
+        {% empty %}
+
+            <li>No previously bought items.</li>
+
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
