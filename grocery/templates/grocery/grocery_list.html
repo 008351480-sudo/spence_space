@@ -74,7 +74,6 @@
 
             <li>
                 {{ purchased_item.name }} -
-                Quantity: {{ purchased_item.quantity }}
 
                 <form method="POST"
                       action="{% url 'add_again' purchased_item.id %}"

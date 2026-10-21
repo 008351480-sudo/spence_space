@@ -15,9 +15,24 @@ def grocery_list(request):
         form = GroceryItemForm(request.POST)
 
         if form.is_valid():
-            item = form.save(commit=False)
-            item.household = household
-            item.save()
+            name = form.cleaned_data["name"]
+            quantity = form.cleaned_data["quantity"]
+
+            existing_item = GroceryItem.objects.filter(
+                name__iexact=name,
+                household=household
+            ).first()
+
+            if existing_item:
+                existing_item.quantity += quantity
+                existing_item.save()
+
+            else:
+                GroceryItem.objects.create(
+                    name=name,
+                    quantity=quantity,
+                    household=household
+                )
 
             return redirect("grocery_list")
 
@@ -61,11 +76,15 @@ def update_quantity(request, item_id):
     )
 
     if request.method == "POST":
-        quantity = request.POST.get("quantity")
+        try:
+            quantity = int(request.POST.get("quantity"))
 
-        if quantity:
-            item.quantity = quantity
-            item.save()
+            if quantity >= 1:
+                item.quantity = quantity
+                item.save()
+
+        except (TypeError, ValueError):
+            pass
 
     return redirect("grocery_list")
 
@@ -80,11 +99,17 @@ def mark_bought(request, item_id):
     )
 
     if request.method == "POST":
-        PurchasedItem.objects.create(
-            name=item.name,
-            quantity=item.quantity,
+        existing_purchased_item = PurchasedItem.objects.filter(
+            name__iexact=item.name,
             household=household
-        )
+        ).first()
+
+        if existing_purchased_item is None:
+            PurchasedItem.objects.create(
+                name=item.name,
+                quantity=item.quantity,
+                household=household
+            )
 
         item.delete()
 
@@ -103,18 +128,18 @@ def add_again(request, item_id):
     if request.method == "POST":
 
         existing_item = GroceryItem.objects.filter(
-            name=purchased_item.name,
+            name__iexact=purchased_item.name,
             household=household
         ).first()
 
         if existing_item:
-            existing_item.quantity += purchased_item.quantity
+            existing_item.quantity += 1
             existing_item.save()
 
         else:
             GroceryItem.objects.create(
                 name=purchased_item.name,
-                quantity=purchased_item.quantity,
+                quantity=1,
                 household=household
         )
 
