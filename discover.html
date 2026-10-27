@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Discover Recipes - Spence Space</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <header class="site-header">
+            <a href="index.html">
+                <img src="images/Transparent-Logo.png"
+                    alt="Spence Space Logo"
+                    class="site-logo">
+            </a>
+        </header>
+
+        <nav class="navbar">
+            <a href="index.html">My Fridges</a>
+            <a href="discover.html">Discover</a>
+            <a href="grocery.html">Grocery List</a>
+            <a href="recipes.html">My Recipes</a>
+        </nav>
+
+        <div class="discover-container">
+
+            <h2>Discover Recipes</h2>
+
+            <form class="recipe-search">
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search for recipes..."
+                >
+                <button type="submit">Search</button>
+            </form>
+
+<h3>Featured Recipes</h3>
+
+<div class="recipe-carousel">
+
+    <button class="scroll-arrow left" type="button" aria-label="Scroll left">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+    
+
+    <div class="recipe-row" id="featured-recipes">
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/spaghetti.jpg" alt="Spaghetti">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="spaghetti">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Spaghetti">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Spaghetti</h4>
+                <p>Italian</p>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/adobo.jpg" alt="Chicken Adobo">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="chicken-adobo">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Chicken Adobo">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Chicken Adobo</h4>
+                <p>Filipino</p>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/tacos.jpg" alt="Chicken Tacos">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="chicken-tacos">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Chicken Tacos">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Chicken Tacos</h4>
+                <p>Hispanic</p>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/burger.jpg" alt="Cheeseburger">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="cheeseburger">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Cheeseburger">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Cheeseburger</h4>
+                <p>American</p>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/ramen.jpg" alt="Ramen">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="ramen">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Ramen">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Ramen</h4>
+                <p>Japanese</p>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/pad-thai.jpg" alt="Pad Thai">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="pad-thai">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Pad Thai">♡</button>
+                </form>
+            </div>
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Pad Thai</h4>
+                <p>Thai</p>
+            </a>
+        </div>
+
+    </div>
+
+    <button class="scroll-arrow right" type="button" aria-label="Scroll right">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+</div>
+
+
+<h3>Recipes You Can Make</h3>
+
+<div class="recipe-carousel">
+
+    <button class="scroll-arrow left" type="button"
+            aria-label="Scroll available recipes left">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+    <div class="recipe-row" id="available-recipes">
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/french-toast.jpg" alt="French Toast">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="french-toast">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save French Toast">♡</button>
+                </form>
+            </div>
+
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>French Toast</h4>
+                <p>Breakfast</p>
+                <p class="recipe-match">4/5 ingredients</p>
+                <div class="ingredient-progress">
+                    <div class="ingredient-progress-fill" style="width: 80%;"></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/omelette.jpg" alt="Cheese Omelette">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="cheese-omelette">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Cheese Omelette">♡</button>
+                </form>
+            </div>
+
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Cheese Omelette</h4>
+                <p>Breakfast</p>
+                <p class="recipe-match">3/4 ingredients</p>
+                <div class="ingredient-progress">
+                    <div class="ingredient-progress-fill" style="width: 75%;"></div>
+                </div>
+            </a>
+        </div>
+
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="recipe-details.html" class="recipe-card">
+                    <img src="images/grilled-cheese.jpg" alt="Grilled Cheese">
+                </a>
+                <form action="/save-recipe" method="POST">
+                    <input type="hidden" name="recipe_id" value="grilled-cheese">
+                    <button type="submit" class="save-recipe-button"
+                            aria-label="Save Grilled Cheese">♡</button>
+                </form>
+            </div>
+
+            <a href="recipe-details.html" class="recipe-card">
+                <h4>Grilled Cheese</h4>
+                <p>Lunch</p>
+                <p class="recipe-match">2/3 ingredients</p>
+                <div class="ingredient-progress">
+                    <div class="ingredient-progress-fill" style="width: 66.67%;"></div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <button class="scroll-arrow right" type="button"
+            aria-label="Scroll available recipes right">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+</div>
+
+
+            <h3>Browse by Cuisine</h3>
+
+            <div class="cuisine-grid">
+                <button type="button">Italian</button>
+                <button type="button">Filipino</button>
+                <button type="button">Hispanic</button>
+                <button type="button">Mediterranean</button>
+                <button type="button">American</button>
+                <button type="button">Nigerian</button>
+                <button type="button">Soul Food</button>
+                <button type="button">Thai</button>
+            </div>
+
+        </div>
+    
+        <script>
+            const recipeRow = document.getElementById("featured-recipes");
+
+            document.querySelector(".scroll-arrow.left").addEventListener("click", function() {
+                recipeRow.scrollBy({
+                    left: -400,
+                    behavior: "smooth"
+                });
+            });
+
+            document.querySelector(".scroll-arrow.right").addEventListener("click", function() {
+                recipeRow.scrollBy({
+                    left: 400,
+                    behavior: "smooth"
+                });
+            });
+        </script>
+
+
+    </body>
+</html>

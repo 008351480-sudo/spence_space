@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Ingredients - Spence Space</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <a href="index.html">
+            <img src="images/Transparent-Logo.png"
+                 alt="Spence Space Logo"
+                 class="site-logo">
+        </a>
+    </header>
+
+    <nav class="navbar">
+        <a href="index.html">My Fridges</a>
+        <a href="discover.html">Discover</a>
+        <a href="grocery.html">Grocery List</a>
+        <a href="recipes.html">My Recipes</a>
+    </nav>
+
+    <div class="add-ingredients-container">
+
+        <h2>Add Ingredients</h2>
+        <p>Choose how you would like to add ingredients to your refrigerator.</p>
+
+        <div class="add-ingredients-options">
+
+            <a href="scan-receipt.html">
+                <i data-lucide="receipt"></i>
+                Scan Receipt
+            </a>
+
+            <a href="scan-barcode.html">
+                <i data-lucide="scan-barcode"></i>
+                Scan Barcode
+            </a>
+
+            <a href="manual-ingredients.html">
+                <i data-lucide="pencil"></i>
+                Add Manually
+            </a>
+
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

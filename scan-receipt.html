@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <title>Scan Receipt</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <header class="site-header">
+            <a href="index.html">
+                <img src="images/Transparent-Logo.png"
+                    alt="Spence Space Logo"
+                    class="site-logo">
+            </a>
+        </header>
+ 
+        <nav class="navbar">
+            <a href="index.html">My Fridges</a>
+            <a href="discover.html">Discover</a>
+            <a href="grocery.html">Grocery List</a>
+            <a href="recipes.html">My Recipes</a>           
+        </nav>
+
+        
+        <div class="receipt-page">
+
+            <h2>Scan Receipt</h2>
+            <p>Upload a receipt to add ingredients to your refrigerator.</p>
+
+            <div class="receipt-upload-card">
+
+                <form action="verify-receipt.html" method="GET">
+
+                    <div class="receipt-upload-area">
+
+                        <i data-lucide="receipt-text"></i>
+
+                        <h3>Upload Your Receipt</h3>
+
+                        <p>Choose a photo of your receipt from your device.</p>
+
+                        <label for="receipt-file" class="receipt-file-button">
+                            <i data-lucide="upload"></i>
+                            Choose File
+                        </label>
+
+                        <input type="file"
+                            id="receipt-file"
+                            name="receipt"
+                            accept="image/*"
+                            required>
+
+                        <p class="receipt-file-name" id="receipt-file-name">
+                            No file selected
+                        </p>
+
+                        <small>JPG, PNG or WebP</small>
+
+                    </div>
+
+                    <div class="receipt-upload-footer">
+
+                        <span>Step 1 of 2: Upload Receipt</span>
+
+                        <button type="submit" class="receipt-continue">
+                            Continue →
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <p class="receipt-tip">
+                <i data-lucide="lightbulb"></i>
+                Tip: Make sure the receipt is clear, well-lit, and all items are visible.
+            </p>
+
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+
+<html> 
+    <header class="site-header">
+        <a href="index.html">
+            <img src="images/Transparent-Logo.png"
+                alt="Spence Space Logo"
+                class="site-logo">
+        </a>
+    </header>
+    
+    <head>
+        <title>Add Refrigerator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h1>Add Refrigerator</h1>
+
+        <form class="add-fridge-form" action="fridge-created.html" method="GET">
+            <label for="fridge-name">Name</label>
+            <input type="text" id="fridge-name" name="fridge-name" required>
+
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                <option>Kitchen</option>
+                <option>Bedroom</option>
+                <option>Garage</option>
+                <option>Backyard</option>
+                <option>Other</option>
+            </select>
+
+            <button type="submit">Create Refrigerator</button>
+        </form>
+
+    </body>
+</html>
