@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% comment %}Django version of scan-receipt.html{% endcomment %}
+
+{% block title %}Scan Receipt{% endblock %}
+
+{% block head %}
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+{% endblock %}
+
+{% block content %}
+        <div class="receipt-page">
+
+            <h2>Scan Receipt</h2>
+            <p>Upload a receipt to add ingredients to {{ fridge.name }}.</p>
+
+            <div class="receipt-upload-card">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="receipt-upload-area">
+
+                        <i data-lucide="receipt-text"></i>
+
+                        <h3>Upload Your Receipt</h3>
+
+                        <p>Choose a photo of your receipt from your device.</p>
+
+                        <label for="receipt-file" class="receipt-file-button">
+                            <i data-lucide="upload"></i>
+                            Choose File
+                        </label>
+
+                        <input type="file"
+                            id="receipt-file"
+                            name="receipt"
+                            accept="image/*"
+                            required>
+
+                        <p class="receipt-file-name" id="receipt-file-name">
+                            No file selected
+                        </p>
+
+                        <small>JPG, PNG or WebP</small>
+
+                    </div>
+
+                    <div class="receipt-upload-footer">
+
+                        <span>Step 1 of 2: Upload Receipt</span>
+
+                        <button type="submit" class="receipt-continue">
+                            Continue →
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <p class="receipt-tip">
+                <i data-lucide="lightbulb"></i>
+                Tip: Make sure the receipt is clear, well-lit, and all items are visible.
+            </p>
+
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        lucide.createIcons();
+
+        // Show the name of the picked file
+        document.getElementById("receipt-file").addEventListener("change", event => {
+            const file = event.target.files[0];
+            document.getElementById("receipt-file-name").textContent = file ? file.name : "No file selected";
+        });
+    </script>
+{% endblock %}

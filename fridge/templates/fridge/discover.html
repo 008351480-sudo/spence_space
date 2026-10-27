@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% comment %}Django version of discover.html. The recipes come from fridge/recipes.py.{% endcomment %}
+
+{% block title %}Discover Recipes - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="discover-container">
+
+            <h2>Discover Recipes</h2>
+
+            <form class="recipe-search" method="get">
+                <input
+                    type="search"
+                    name="search"
+                    placeholder="Search for recipes..."
+                    value="{{ search }}"
+                >
+                <button type="submit">Search</button>
+            </form>
+
+<h3>{% if search %}Results for "{{ search }}"{% elif cuisine %}{{ cuisine }} Recipes{% else %}Featured Recipes{% endif %}</h3>
+
+<div class="recipe-carousel">
+
+    <button class="scroll-arrow left" type="button" aria-label="Scroll left" data-row="featured-recipes">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+    <div class="recipe-row" id="featured-recipes">
+        {% for recipe in featured %}
+            {% include "fridge/recipe-item.html" %}
+        {% empty %}
+            <p class="no-recipes">No recipes found.</p>
+        {% endfor %}
+    </div>
+
+    <button class="scroll-arrow right" type="button" aria-label="Scroll right" data-row="featured-recipes">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+</div>
+
+
+<h3>Recipes You Can Make</h3>
+
+<div class="recipe-carousel">
+
+    <button class="scroll-arrow left" type="button"
+            aria-label="Scroll available recipes left" data-row="available-recipes">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+    <div class="recipe-row" id="available-recipes">
+        {% for recipe in can_make %}
+            {% include "fridge/recipe-item.html" with show_match=True %}
+        {% empty %}
+            <p class="no-recipes">Add ingredients to your fridge to see what you can make.</p>
+        {% endfor %}
+    </div>
+
+    <button class="scroll-arrow right" type="button"
+            aria-label="Scroll available recipes right" data-row="available-recipes">
+        <span class="boost-bar bar-1"></span>
+        <span class="boost-bar bar-2"></span>
+        <span class="boost-tip"></span>
+    </button>
+
+</div>
+
+
+            <h3>Browse by Cuisine</h3>
+
+            <div class="cuisine-grid">
+                {% for name in cuisines %}
+                    <form method="get">
+                        {% if cuisine == name %}
+                            <button type="submit" class="active">{{ name }}</button>
+                        {% else %}
+                            <button type="submit" name="cuisine" value="{{ name }}">{{ name }}</button>
+                        {% endif %}
+                    </form>
+                {% endfor %}
+            </div>
+
+        </div>
+{% endblock %}
+
+{% block scripts %}
+        <script>
+            // Both rows have arrows now, so each arrow scrolls the row it points at
+            document.querySelectorAll(".scroll-arrow").forEach(function(arrow) {
+                arrow.addEventListener("click", function() {
+                    const row = document.getElementById(arrow.dataset.row);
+                    const amount = arrow.classList.contains("left") ? -400 : 400;
+                    row.scrollBy({
+                        left: amount,
+                        behavior: "smooth"
+                    });
+                });
+            });
+        </script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Spence Space{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'django-extras.css' %}">
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+
+        {% block account_links %}
+            {% if user.is_authenticated %}
+                <div class="account-links">
+                    <a href="{% url 'dashboard' %}" class="account-link">Household</a>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="account-link">Log Out</button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="login-button">Login</a>
+            {% endif %}
+        {% endblock %}
+
+        {% block header %}
+            <header class="site-header">
+                <a href="{% url 'my_fridges' %}">
+                    <img src="{% static 'images/Transparent-Logo.png' %}"
+                        alt="Spence Space Logo"
+                        class="site-logo">
+                </a>
+            </header>
+        {% endblock %}
+
+        {% block nav %}
+            {% with section=request.path|slice:":9" %}
+            <nav class="navbar">
+                <a href="{% url 'my_fridges' %}" {% if section == "/" or section == "/fridges/" %}class="active"{% endif %}>My Fridges</a>
+                <a href="{% url 'discover' %}" {% if section == "/discover" %}class="active"{% endif %}>Discover</a>
+                <a href="{% url 'grocery_list' %}" {% if section == "/grocery/" %}class="active"{% endif %}>Grocery List</a>
+                <a href="{% url 'my_recipes' %}" {% if section == "/recipes/" %}class="active"{% endif %}>My Recipes</a>
+            </nav>
+            {% endwith %}
+        {% endblock %}
+
+        {% if messages %}
+            <div class="site-messages">
+                {% for message in messages %}
+                    <p class="site-message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        {% block scripts %}{% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% comment %}Django version of fridge-stock.html{% endcomment %}
+
+{% block title %}Fridge Stock - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="stock-container">
+
+            <h2>View Fridge Stock</h2>
+
+            <p>View the ingredients currently stored in {{ fridge.name }}.</p>
+
+            {% if ingredients %}
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Quantity</th>
+                        <th>Expiration Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for ingredient in ingredients %}
+                    <tr>
+                        <td>
+                            {% if ingredient.picture %}
+                                <img src="{{ ingredient.picture }}" alt="" class="stock-photo">
+                            {% endif %}
+                            {{ ingredient.name }}
+                        </td>
+                        <td>{{ ingredient.quantity }}</td>
+                        <td {% if ingredient.is_expired %}class="expired"{% endif %}>
+                            {% if ingredient.expiration_date %}
+                                {{ ingredient.expiration_date|date:"m/d/Y" }}
+                                {% if ingredient.is_expired %}(expired){% endif %}
+                            {% else %}
+                                &mdash;
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="post" action="{% url 'remove_ingredient' ingredient.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-button">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="empty-stock">This fridge is empty.</p>
+            {% endif %}
+
+            <a href="{% url 'add_ingredients' fridge.id %}" class="stock-button">
+                Add Ingredients
+            </a>
+
+        </div>
+{% endblock %}

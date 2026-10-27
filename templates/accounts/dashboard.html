@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% comment %}Spence Space design version of the household page (accounts/views.py dashboard_view){% endcomment %}
+
+{% block title %}My Household - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="household-container">
+
+            <h2>{{ household.name }}</h2>
+
+            <h3>Household Members</h3>
+            <ul class="member-list">
+                {% for member in members %}
+                    <li>
+                        <span>{{ member.user.username }}</span>
+                        <span class="member-role">{{ member.get_role_display }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if is_owner %}
+            <div class="invite-box">
+                <p>Invite a family member with this code:</p>
+                <span class="invite-code">{{ household.invite_code }}</span>
+                <p class="form-hint">
+                    They enter this on the sign up page under
+                    "Join an existing household."
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+{% endblock %}
