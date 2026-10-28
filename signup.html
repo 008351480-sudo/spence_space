@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sign Up - Spence Space</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="signup-container">
+
+            <header class="site-header">
+                <a href="index.html">
+                    <img src="images/Transparent-Logo.png"
+                        alt="Spence Space Logo"
+                        class="site-logo">
+                </a>
+            </header>
+            
+            <h2>Sign Up</h2>
+
+            <form class="signup-form" action="login.html" method="GET">
+
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                >
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                >
+
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    required
+                >
+
+                <button type="submit">Sign Up</button>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+
+    </body>
+</html>

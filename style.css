@@ -1,0 +1,867 @@
+/* Spence Space Color Theme */
+:root {
+    --dark-green: #263B3B;
+    --dark-teal: #527F80;
+    --light-teal: #9CCCCC;
+    --cream: #F5F0D5;
+}
+/* Spence Space Logo */
+.site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.site-logo {
+    width: 350px;
+    max-width: 90%;
+    height: auto;
+}
+/* General Styling */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--cream);
+    color: #000000;
+}
+h1 {
+    text-align: center;
+    color: var(--dark-green);
+}
+h2, h3 {
+    color: var(--dark-teal);
+}
+h4, h5, h6 {
+    color: #000000;
+}
+button {
+    background-color: var(--light-teal);
+    color: #000000;
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+.recipe-card h4 {
+    color: #000000;
+}
+
+/* Login/Sign-Up */
+.login-container {
+    width: 350px; 
+    margin: 100px auto; 
+    text-align: center; 
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left; 
+}
+.login-form label {
+    margin-top: 15px; 
+    margin-bottom: 5px;
+}
+.login-form input {
+    width: 100%; 
+    padding: 10px;
+    box-sizing: border-box;
+}
+.login-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+}
+.login-container p {
+    margin-top: 20px;
+}
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    text-decoration: none;
+}
+.signup-container {
+    width: 350px;
+    margin: 100px auto;
+    text-align: center;
+}
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.signup-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.signup-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+}
+.signup-container p {
+    margin-top: 20px;
+}
+
+/* Sign-In Troubleshooting */
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+}
+.reset-container {
+    width: 350px;
+    margin: 100px auto;
+    text-align: center;
+}
+.reset-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.reset-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.reset-form input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.reset-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+}
+.new-password-container {
+    width: 350px;
+    margin: 100px auto;
+    text-align: center;
+}
+.new-password-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.new-password-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.new-password-form input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.new-password-form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* index.html Main Page
+    Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 15px;
+
+    background-color: var(--dark-teal);
+    padding: 15px 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 900px;
+}
+.navbar a {
+    display: inline-block;
+    margin: 0;
+    padding: 12px 20px;
+
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+}
+.navbar a:hover {
+    background-color: var(--dark-green);
+    color: white;
+}
+.navbar a.active {
+    background-color: var(--dark-green);
+    color: white;
+}
+.fridges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.fridges a {
+    display: inline-block;
+    padding: 15px 25px;
+
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+.fridges a:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+    /* Login Button */
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    display: inline-block;
+    padding: 12px 22px;
+
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-button:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+/* add-fridge.html/fridge.html Adding a Fridge */
+.add-fridge-form {
+    width: 300px; 
+    margin: 40px auto;
+}
+.add-fridge-form button {
+    display: block;
+    margin: 25px auto 0;
+    padding: 10px 20px;
+}
+.add-fridge-form label {
+    display: block;
+    margin-top: 15px;
+}
+.add-fridge-form input,
+.add-fridge-form select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.fridge-title {
+    text-align: center; 
+    margin-top: 40px; 
+}
+.fridge-actions {
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    margin-top: 40px; 
+}
+.fridge-actions a {
+    width: 150px;
+    padding: 30px 15px;
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fridge-actions a:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+/* fridge-created.html Refrigerator Created Page */
+.fridge-created-container {
+    width: 600px;
+    max-width: 90%;
+    margin: 60px auto;
+    text-align: center;
+}
+.fridge-created-container h2 {
+    color: #527F80;
+    margin-bottom: 20px;
+}
+.fridge-created-container p {
+    margin: 15px 0;
+}
+.fridge-created-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 35px;
+}
+.fridge-created-actions a {
+    display: block;
+    background-color: #9CCCCC;
+    color: #263B3B;
+    text-decoration: none;
+    padding: 20px;
+    border: 1px solid #527F80;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+.fridge-created-actions a:hover {
+    background-color: #527F80;
+    color: white;
+}
+@media (max-width: 480px) {
+    .fridge-created-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* manual-ingredients.html 
+Add Ingredients to Inventory Manually */
+.manual-container {
+    width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+.manual-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.manual-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.manual-form input {
+    padding: 10px;
+    box-sizing: border-box;
+}
+.manual-form button {
+    margin-top: 25px;
+    padding: 10px 20px;
+}
+
+/* scan-barcode.html 
+Scan Ingredients per Item to Add to Inventory */
+.barcode-container {
+    width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+.barcode-scanner {
+    height: 200px;
+    border: 2px dashed black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0;
+}
+.barcode-container button {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+.barcode-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.barcode-form label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.barcode-form input {
+    padding: 10px;
+    box-sizing: border-box;
+}
+.barcode-form button {
+    margin-top: 25px;
+}
+
+/* scan-receipt.html 
+Receipt Upload to Add Inventory in Bulk */
+.receipt-section {
+    width: 400px; 
+    margin: 40px auto; 
+    text-align: center; 
+}
+.receipt-form {
+    margin-top: 30px; 
+}
+.receipt-form label {
+    display: block; 
+    margin-bottom: 10px; 
+}
+.receipt-form button {
+    display: block; 
+    margin: 20px auto 0; 
+    padding: 10px 25px;
+}
+
+/* fridge-stock.html 
+View Fridge Inventory/Stock */
+.stock-container {
+    width: 700px;
+    max-width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+.stock-table th,
+.stock-table td {
+    border: 1px solid #527F80;
+    padding: 15px;
+    text-align: center;
+}
+.stock-table th {
+    background-color: #527F80;
+    color: white;
+}
+.stock-table td {
+    background-color: #F5F0D5;
+    color: black;
+}
+.stock-table tr:hover td {
+    background-color: #E1EFDF;
+}
+.stock-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background-color: #9CCCCC;
+    color: #263B3B;
+    border: 1px solid #527F80;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.stock-button:hover {
+    background-color: #527F80;
+    color: white;
+}
+
+/* verify-receipt.html
+Make Sure the Ingredients are Correct before Adding to Inventory */
+.verify-container {
+    width: 800px;
+    max-width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+.verify-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+.verify-table th,
+.verify-table td {
+    border: 1px solid black;
+    padding: 10px;
+}
+.verify-table th {
+    background-color: #9CCCCC;
+}
+.verify-table input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.verify-form button {
+    margin-top: 25px;
+    padding: 10px 25px;
+}
+
+/* discover.html Discover Recipes Page */
+.discover-container {
+    width: 95%;
+    max-width: none;
+    margin: 40px auto;
+    text-align: left;
+}
+.recipe-search {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+.recipe-search input {
+    width: 300px;
+    padding: 10px;
+}
+.recipe-search button {
+    padding: 10px 20px;
+}
+    /* Horizontal Featured Recipes */
+.recipe-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 20px 5px;
+    scroll-behavior: smooth;
+
+    /* Hide Scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.recipe-row::-webkit-scrollbar {
+    display: none;
+}
+.recipe-card {
+    flex: 0 0 180px;
+    text-decoration: none;
+    color: black;
+    text-align: left;
+}
+.recipe-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.recipe-card h4 {
+    margin: 10px 0 5px;
+}
+.recipe-card p {
+    margin: 0;
+    font-size: 13px;
+}
+.recipe-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+    /* Recipe Carousel Layout */
+.recipe-carousel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+.recipe-carousel .recipe-row {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+}
+.recipe-carousel .scroll-arrow {
+    flex-shrink: 0;
+}
+    /* Recipe Navigation */
+.recipe-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.recipe-arrows {
+    display: flex;
+    gap: 15px;
+}
+.scroll-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 55px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--dark-teal);
+}
+.boost-bar {
+    display: block;
+    width: 6px;
+    height: 15px;
+    background: currentColor;
+}
+.bar-2 {
+    height: 22px;
+}
+.boost-tip {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 22px solid currentColor;
+}
+    /* Reverse left arrow */
+.scroll-arrow.left {
+    transform: scaleX(-1);
+}
+    /* Racing Boost Animation */
+.scroll-arrow .bar-1 {
+    animation: boost-flash 1.2s infinite;
+}
+.scroll-arrow .bar-2 {
+    animation: boost-flash 1.2s 0.2s infinite;
+}
+.scroll-arrow .boost-tip {
+    animation: boost-flash 1.2s 0.4s infinite;
+}
+@keyframes boost-flash {
+    0%, 65%, 100% {
+        opacity: 0.3;
+    }
+
+    25%, 45% {
+        opacity: 1;
+    }
+}
+.scroll-arrow:hover {
+    color: var(--dark-green);
+}
+@media (prefers-reduced-motion: reduce) {
+    .scroll-arrow .boost-bar,
+    .scroll-arrow .boost-tip {
+        animation: none;
+    }
+}
+    /* Save Recipe Heart Buttons */
+.recipe-item {
+    flex: 0 0 180px;
+    min-width: 0;
+}
+.recipe-item .recipe-card {
+    display: block;
+}
+.recipe-image-container {
+    position: relative;
+}
+.recipe-image-container img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block;
+}
+.save-recipe-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    padding: 0;
+
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #527F80;
+    border: 1px solid #527F80;
+    border-radius: 50%;
+
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+}
+.save-recipe-button:hover {
+    background-color: #9CCCCC;
+    color: #263B3B;
+}
+    /* Ingredient Progress Bar */
+.recipe-match {
+    color: var(--dark-teal);
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px !important;
+}
+.ingredient-progress {
+    width: 100%;
+    height: 8px;
+    background-color: #DCE6DE;
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+.ingredient-progress-fill {
+    height: 100%;
+    background-color: var(--dark-teal);
+    border-radius: 10px;
+}
+    /* Selecting a Cuisine */
+.cuisine-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+.cuisine-grid button {
+    padding: 12px 20px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* add-fridge.html Add Ingredients Options */
+.add-ingredients-container {
+    width: 700px;
+    max-width: 90%;
+    margin: 50px auto;
+    text-align: center;
+}
+.add-ingredients-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+.add-ingredients-options a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    min-height: 100px;
+    padding: 15px;
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    border: 1px solid var(--dark-teal);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.add-ingredients-options a:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+.add-ingredients-options a {
+    flex-direction: column;
+    gap: 12px;
+}
+.add-ingredients-options svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* scan-receipt.html Scan Receipt Feature */ 
+.receipt-page {
+    width: 600px;
+    max-width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+.receipt-page h2 {
+    color: var(--dark-teal);
+    margin-bottom: 10px;
+}
+.receipt-page > p {
+    margin-bottom: 25px;
+}
+.receipt-upload-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.receipt-upload-area {
+    border: 2px dashed var(--light-teal);
+    background-color: #F8FCFA;
+    border-radius: 10px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.receipt-upload-area > svg {
+    width: 50px;
+    height: 50px;
+    color: var(--dark-teal);
+}
+.receipt-upload-area h3 {
+    color: var(--dark-green);
+    margin: 0;
+}
+.receipt-upload-area p {
+    margin: 0;
+    color: #647474;
+}
+.receipt-file-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.receipt-file-button:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+.receipt-file-button svg {
+    width: 20px;
+    height: 20px;
+}
+#receipt-file {
+    display: none;
+}
+.receipt-file-name {
+    font-size: 13px;
+}
+.receipt-upload-area small {
+    color: #647474;
+}
+.receipt-upload-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    gap: 15px;
+}
+.receipt-upload-footer span {
+    color: var(--dark-teal);
+    font-size: 13px;
+}
+.receipt-continue {
+    background-color: var(--dark-teal);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    cursor: pointer;
+}
+.receipt-continue:hover {
+    background-color: var(--dark-green);
+}
+.receipt-page .receipt-tip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    color: var(--dark-teal);
+    font-size: 13px;
+}
+.receipt-tip svg {
+    width: 18px;
+    height: 18px;
+}
