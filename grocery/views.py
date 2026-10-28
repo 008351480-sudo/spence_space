@@ -6,6 +6,7 @@ from .models import GroceryItem, PurchasedItem
 
 @login_required
 def grocery_list(request):
+    """Displays a household's grocery list and also previously bought items"""
     household = request.user.profile.household
 
     items = GroceryItem.objects.filter(household=household)
@@ -52,6 +53,7 @@ def grocery_list(request):
 
 @login_required
 def remove_item(request, item_id):
+    """Removes an item from the current household's grocery list"""
     household = request.user.profile.household
 
     item = get_object_or_404(
@@ -67,6 +69,7 @@ def remove_item(request, item_id):
 
 @login_required
 def update_quantity(request, item_id):
+    """Updates an item's quantity after entering a new quantity"""
     household = request.user.profile.household
 
     item = get_object_or_404(
@@ -90,6 +93,7 @@ def update_quantity(request, item_id):
 
 @login_required
 def mark_bought(request, item_id):
+    """Moves an item to Previously Bought if bought is clicked and is a new item"""
     household = request.user.profile.household
 
     item = get_object_or_404(
@@ -117,6 +121,7 @@ def mark_bought(request, item_id):
 
 @login_required
 def add_again(request, item_id):
+    """Adds a previously bought item back into the grocery list"""
     household = request.user.profile.household
 
     purchased_item = get_object_or_404(
