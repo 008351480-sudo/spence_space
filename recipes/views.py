@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from .models import Recipe
 
-# Create your views here.
+
+def discover(request):
+    recipes = Recipe.objects.all().order_by("name")
+
+    return render(
+        request,
+        "recipes/discover.html",
+        {"recipes": recipes}
+    )
