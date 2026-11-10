@@ -1,0 +1,308 @@
+/* Extra styles for things the Django version needs that the
+   original pages didn't have (errors, messages, log out, photos).
+   style.css is a copy of the main one and isn't changed. */
+
+/* Household / Log Out in the top right */
+.account-links {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+.account-links form {
+    margin: 0;
+}
+.account-link {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: var(--light-teal);
+    color: var(--dark-green);
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: inherit;
+}
+.account-link:hover {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+/* Success / error messages */
+.site-messages {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.site-message {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--dark-teal);
+    background-color: #E1EFDF;
+    color: var(--dark-green);
+    text-align: center;
+}
+.site-message.error {
+    border-color: #b3261e;
+    background-color: #fdecea;
+    color: #b3261e;
+}
+.form-error {
+    color: #b3261e;
+    font-size: 13px;
+    margin: 4px 0 0;
+}
+.form-hint {
+    color: #647474;
+    font-size: 12px;
+    margin: 4px 0 0;
+}
+
+/* Household section on the sign up page */
+.household-choice {
+    margin-top: 20px;
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+    padding: 10px 15px 15px;
+    display: flex;
+    flex-direction: column;
+}
+.household-choice legend {
+    color: var(--dark-teal);
+    font-weight: bold;
+    padding: 0 5px;
+}
+.household-choice .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+}
+.signup-form .household-choice input[type="radio"] {
+    width: auto;
+}
+
+/* My Fridges list */
+.fridge-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+.fridges .fridge-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 160px;
+}
+.fridge-location {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+/* File inputs and photo previews */
+.manual-form input[type="file"],
+.barcode-form input[type="file"],
+.barcode-photo-upload input[type="file"] {
+    background-color: white;
+    border: 1px solid var(--dark-teal);
+    border-radius: 6px;
+}
+.barcode-photo-upload {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.barcode-photo-upload label {
+    margin-bottom: 5px;
+}
+.barcode-photo-upload input {
+    padding: 10px;
+}
+.photo-preview {
+    max-width: 160px;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+/* Camera inside the dashed scanner box */
+.barcode-scanner {
+    flex-direction: column;
+    overflow: hidden;
+}
+#camera {
+    width: 100%;
+}
+
+/* Fridge stock table */
+.stock-photo {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.stock-table .expired {
+    color: #b3261e;
+    font-weight: bold;
+}
+.remove-button {
+    padding: 6px 12px;
+}
+.empty-stock {
+    margin-top: 30px;
+    color: var(--dark-teal);
+}
+
+/* Saved recipe heart */
+.save-recipe-button.saved {
+    background-color: var(--dark-teal);
+    color: white;
+}
+.recipe-image-container form {
+    margin: 0;
+}
+.no-recipes {
+    color: var(--dark-teal);
+    padding: 20px 5px;
+}
+.cuisine-grid form {
+    margin: 0;
+}
+.cuisine-grid button.active {
+    background-color: var(--dark-teal);
+    color: white;
+}
+
+/* Household page */
+.household-container {
+    width: 500px;
+    max-width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+.member-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.member-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--dark-teal);
+}
+.member-role {
+    color: var(--dark-teal);
+}
+.invite-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid var(--dark-teal);
+    border-radius: 8px;
+}
+.invite-code {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    padding: 6px 14px;
+    border: 2px dashed var(--dark-teal);
+    border-radius: 6px;
+    color: var(--dark-green);
+}
+
+/* Grocery list */
+.grocery-add-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    text-align: left;
+}
+.grocery-add-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+.grocery-add-form input {
+    padding: 10px;
+    box-sizing: border-box;
+}
+.grocery-add-form input[type="number"] {
+    width: 90px;
+}
+.grocery-add-form button {
+    padding: 10px 20px;
+}
+.inline-form {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+.quantity-input {
+    width: 60px;
+    padding: 6px;
+}
+.small-button {
+    padding: 6px 12px;
+}
+.grocery-actions {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+.grocery-actions form {
+    margin: 0;
+}
+.previously-bought-title {
+    margin-top: 40px;
+}
+
+/* "+ Grocery List" under Recipes You Can Make */
+.add-missing-button {
+    margin-top: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    width: 100%;
+}
+.recipe-item form {
+    margin: 0;
+}
+
+/* Phones */
+@media (max-width: 700px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    .account-links,
+    .login-button {
+        position: static;
+        justify-content: center;
+        margin: 15px auto 0;
+        width: fit-content;
+    }
+    .login-button {
+        display: block;
+    }
+    .fridge-actions {
+        flex-wrap: wrap;
+    }
+    .login-container,
+    .signup-container,
+    .reset-container,
+    .new-password-container,
+    .manual-container,
+    .barcode-container {
+        width: auto;
+        max-width: 350px;
+        padding: 0 16px;
+    }
+}

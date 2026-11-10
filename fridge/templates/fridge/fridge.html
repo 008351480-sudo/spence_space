@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% comment %}Django version of fridge.html{% endcomment %}
+
+{% block title %}{{ fridge.name }} - Spence Space{% endblock %}
+
+{% block content %}
+            <h2 class="fridge-title">{{ fridge.name }}</h2>
+
+            <div class="fridge-actions">
+                <a href="{% url 'scan_receipt' fridge.id %}">Scan Receipt</a>
+                <a href="{% url 'manual_ingredients' fridge.id %}">Add Ingredients Manually</a>
+                <a href="{% url 'scan_barcode' fridge.id %}">Scan Ingredient Barcode</a>
+                <a href="{% url 'fridge_stock' fridge.id %}">View Fridge Stock</a>
+            </div>
+{% endblock %}

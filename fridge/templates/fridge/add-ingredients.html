@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% comment %}Django version of add-ingredients.html{% endcomment %}
+
+{% block title %}Add Ingredients - Spence Space{% endblock %}
+
+{% block head %}
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="add-ingredients-container">
+
+        <h2>Add Ingredients</h2>
+        <p>Choose how you would like to add ingredients to {{ fridge.name }}.</p>
+
+        <div class="add-ingredients-options">
+
+            <a href="{% url 'scan_receipt' fridge.id %}">
+                <i data-lucide="receipt"></i>
+                Scan Receipt
+            </a>
+
+            <a href="{% url 'scan_barcode' fridge.id %}">
+                <i data-lucide="scan-barcode"></i>
+                Scan Barcode
+            </a>
+
+            <a href="{% url 'manual_ingredients' fridge.id %}">
+                <i data-lucide="pencil"></i>
+                Add Manually
+            </a>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        lucide.createIcons();
+    </script>
+{% endblock %}
