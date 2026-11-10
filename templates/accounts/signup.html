@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% comment %}Django version of signup.html (uses the SignUpForm from accounts/forms.py){% endcomment %}
+
+{% block title %}Sign Up - Spence Space{% endblock %}
+{% block account_links %}{% endblock %}
+{% block header %}{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block content %}
+        <div class="signup-container">
+
+            <header class="site-header">
+                <a href="{% url 'my_fridges' %}">
+                    <img src="{% static 'images/Transparent-Logo.png' %}"
+                        alt="Spence Space Logo"
+                        class="site-logo">
+                </a>
+            </header>
+
+            <h2>Sign Up</h2>
+
+            <form class="signup-form" method="post">
+                {% csrf_token %}
+
+                <label for="name">Username</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="username"
+                    value="{{ form.username.value|default:'' }}"
+                    required
+                >
+                {% for error in form.username.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ form.email.value|default:'' }}"
+                    required
+                >
+                {% for error in form.email.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password1"
+                    autocomplete="new-password"
+                    required
+                >
+                {% for error in form.password1.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="password2"
+                    autocomplete="new-password"
+                    required
+                >
+                {% for error in form.password2.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <fieldset class="household-choice">
+                    <legend>Family / Household</legend>
+
+                    {% for radio in form.household_action %}
+                        <label class="radio-option">{{ radio.tag }} {{ radio.choice_label }}</label>
+                    {% endfor %}
+
+                    <label for="household-name">New household name</label>
+                    <input
+                        type="text"
+                        id="household-name"
+                        name="household_name"
+                        value="{{ form.household_name.value|default:'' }}"
+                        placeholder="e.g. The Smith Family"
+                    >
+                    {% for error in form.household_name.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                    <label for="invite-code">Invite code (if joining)</label>
+                    <input
+                        type="text"
+                        id="invite-code"
+                        name="invite_code"
+                        value="{{ form.invite_code.value|default:'' }}"
+                        maxlength="8"
+                    >
+                    {% for error in form.invite_code.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+                </fieldset>
+
+                <button type="submit">Sign Up</button>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+
+        </div>
+{% endblock %}

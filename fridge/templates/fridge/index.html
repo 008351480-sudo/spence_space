@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% comment %}Django version of index.html{% endcomment %}
+
+{% block title %}Spence Space{% endblock %}
+
+{% block content %}
+    <div class="fridges">
+        <h2>My Refrigerators</h2>
+
+        {% if fridges %}
+            <div class="fridge-list">
+                {% for fridge in fridges %}
+                    <a href="{% url 'fridge' fridge.id %}">
+                        {{ fridge.name }}
+                        <span class="fridge-location">{{ fridge.location }} &middot; {{ fridge.ingredients.count }} item{{ fridge.ingredients.count|pluralize }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{% url 'add_fridge' %}">+ Add New</a>
+
+    </div>
+{% endblock %}

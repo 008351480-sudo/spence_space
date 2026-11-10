@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% comment %}Django version of add-fridge.html{% endcomment %}
+
+{% block title %}Add Refrigerator{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block content %}
+        <h1>Add Refrigerator</h1>
+
+        <form class="add-fridge-form" method="post">
+            {% csrf_token %}
+
+            <label for="fridge-name">Name</label>
+            <input type="text" id="fridge-name" name="name" value="{{ form.name.value|default:'' }}" maxlength="100" required>
+            {% for error in form.name.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                {% for value, label in locations %}
+                    <option value="{{ value }}" {% if form.location.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Create Refrigerator</button>
+        </form>
+{% endblock %}

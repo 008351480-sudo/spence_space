@@ -1,0 +1,38 @@
+{% load static %}
+{% comment %}One recipe card with the heart button. Used by discover.html and recipes.html.{% endcomment %}
+        <div class="recipe-item">
+            <div class="recipe-image-container">
+                <a href="#" class="recipe-card">
+                    <img src="{% static recipe.image %}" alt="{{ recipe.name }}">
+                </a>
+                <form action="{% url 'save_recipe' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    {% if recipe.id in saved_ids %}
+                        <button type="submit" class="save-recipe-button saved"
+                                aria-label="Unsave {{ recipe.name }}">♥</button>
+                    {% else %}
+                        <button type="submit" class="save-recipe-button"
+                                aria-label="Save {{ recipe.name }}">♡</button>
+                    {% endif %}
+                </form>
+            </div>
+            <a href="#" class="recipe-card">
+                <h4>{{ recipe.name }}</h4>
+                <p>{{ recipe.category }}</p>
+                {% if show_match %}
+                    <p class="recipe-match">{{ recipe.have }}/{{ recipe.total }} ingredients</p>
+                    <div class="ingredient-progress">
+                        <div class="ingredient-progress-fill" style="width: {{ recipe.percent }}%;"></div>
+                    </div>
+                {% endif %}
+            </a>
+            {% if show_match and recipe.have < recipe.total %}
+                <form action="{% url 'add_missing_to_grocery' recipe.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <button type="submit" class="add-missing-button">+ Grocery List</button>
+                </form>
+            {% endif %}
+        </div>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% comment %}My Recipes - the recipes hearted on the Discover page. (There wasn't a recipes.html yet.){% endcomment %}
+
+{% block title %}My Recipes - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="discover-container">
+
+            <h2>My Recipes</h2>
+
+            <div class="recipe-row">
+                {% for recipe in recipes %}
+                    {% include "fridge/recipe-item.html" %}
+                {% empty %}
+                    <p class="no-recipes">
+                        You haven't saved any recipes yet. Tap the ♡ on a recipe in
+                        <a href="{% url 'discover' %}">Discover</a> to save it here.
+                    </p>
+                {% endfor %}
+            </div>
+
+        </div>
+{% endblock %}

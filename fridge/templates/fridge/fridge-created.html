@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% comment %}Django version of fridge-created.html{% endcomment %}
+
+{% block title %}Refrigerator Created - Spence Space{% endblock %}
+
+{% block content %}
+    <main class="fridge-created-container">
+        <h2>Refrigerator Created!</h2>
+
+        <p>Your refrigerator "{{ fridge.name }}" has been created.</p>
+        <p>What would you like to do next?</p>
+
+        <div class="fridge-created-actions">
+            <a href="{% url 'add_ingredients' fridge.id %}">Add Ingredients</a>
+            <a href="{% url 'fridge_stock' fridge.id %}">View Ingredients</a>
+            <a href="{% url 'discover' %}">Discover Recipes</a>
+            <a href="{% url 'my_fridges' %}">My Fridges</a>
+        </div>
+    </main>
+{% endblock %}

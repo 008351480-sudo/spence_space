@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% comment %}
+Spence Space design version of grocery/templates/grocery/grocery_list.html.
+Uses the same views and form as the grocery app (grocery/views.py).
+{% endcomment %}
+
+{% block title %}Grocery List - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="stock-container">
+
+            <h2>Grocery List</h2>
+
+            <p>Everything your household needs to buy.</p>
+
+            <form class="grocery-add-form" method="POST" action="{% url 'grocery_list' %}">
+                {% csrf_token %}
+
+                <div>
+                    <label for="grocery-name">Item</label>
+                    <input
+                        type="text"
+                        id="grocery-name"
+                        name="name"
+                        placeholder="e.g. Milk"
+                        value="{{ form.name.value|default:'' }}"
+                        maxlength="100"
+                        required
+                    >
+                    {% for error in form.name.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+                </div>
+
+                <div>
+                    <label for="grocery-quantity">Quantity</label>
+                    <input
+                        type="number"
+                        id="grocery-quantity"
+                        name="quantity"
+                        min="1"
+                        value="{{ form.quantity.value|default:'1' }}"
+                        required
+                    >
+                    {% for error in form.quantity.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+                </div>
+
+                <button type="submit">Add Item</button>
+            </form>
+
+            {% if items %}
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'update_quantity' item.id %}" class="inline-form">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="quantity-input" aria-label="Quantity of {{ item.name }}">
+                                <button type="submit" class="small-button">Change</button>
+                            </form>
+                        </td>
+                        <td>
+                            <div class="grocery-actions">
+                                <form method="POST" action="{% url 'mark_bought' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="small-button">Bought</button>
+                                </form>
+                                <form method="POST" action="{% url 'remove_item' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="small-button">Remove</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="empty-stock">No items in your grocery list.</p>
+            {% endif %}
+
+            <h3 class="previously-bought-title">Previously Bought</h3>
+
+            {% if purchased_items %}
+            <table class="stock-table">
+                <tbody>
+                    {% for purchased_item in purchased_items %}
+                    <tr>
+                        <td>{{ purchased_item.name }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'add_again' purchased_item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="small-button">Add Again</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="empty-stock">No previously bought items.</p>
+            {% endif %}
+
+        </div>
+{% endblock %}

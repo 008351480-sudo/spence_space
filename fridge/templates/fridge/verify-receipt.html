@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% comment %}
+Django version of verify-receipt.html.
+Reading items off the receipt isn't built yet, so the rows start empty.
+{% endcomment %}
+
+{% block title %}Verify Receipt - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="verify-container">
+
+            <h2>Verify Receipt Ingredients</h2>
+
+            <p>
+                Type in the ingredients from your receipt.
+                Make any corrections before adding them to {{ fridge.name }}.
+                Empty rows are skipped.
+            </p>
+
+            <form class="verify-form" method="post">
+                {% csrf_token %}
+
+                <table class="verify-table">
+                    <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>Quantity</th>
+                            <th>Expiration Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for row in rows %}
+                        <tr>
+                            <td>
+                                <input type="text" name="ingredient[]" maxlength="200">
+                            </td>
+                            <td>
+                                <input type="number" name="quantity[]" value="1" min="1">
+                            </td>
+                            <td>
+                                <input type="date" name="expiration[]">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <button type="submit">Add All to Fridge</button>
+
+            </form>
+
+        </div>
+{% endblock %}

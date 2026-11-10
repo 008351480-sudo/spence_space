@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% comment %}
+Django version of scan-barcode.html.
+Camera scanning runs in the browser. Barcode photos are read in Python
+(read_barcode_photo_view) and products are looked up in Python too
+(lookup_barcode_view). Saving goes to scan_barcode_view.
+{% endcomment %}
+
+{% block title %}Scan Barcode - Spence Space{% endblock %}
+
+{% block content %}
+        <div class="barcode-container">
+
+            <h2>Scan Ingredient Barcode</h2>
+
+            <p>Scan a product barcode to add an ingredient to {{ fridge.name }}.</p>
+
+            <div class="barcode-scanner">
+                <div id="camera"></div>
+                <p id="scan-status">Position barcode here</p>
+            </div>
+
+            <button type="button" id="scan-button">Scan Barcode</button>
+
+            <div class="barcode-photo-upload">
+                <label for="barcode-photo">Or upload a photo of the barcode</label>
+                <input
+                    type="file"
+                    id="barcode-photo"
+                    accept="image/*"
+                >
+            </div>
+
+            <h3>Ingredient Information</h3>
+
+            <form class="barcode-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label for="ingredient">Ingredient Name</label>
+                <input
+                    type="text"
+                    id="ingredient"
+                    name="name"
+                    value="{{ form.name.value|default:'' }}"
+                    maxlength="200"
+                    required
+                >
+                {% for error in form.name.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="quantity">Quantity</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    value="{{ form.quantity.value|default:'1' }}"
+                    required
+                >
+                {% for error in form.quantity.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="expiration">Expiration Date (Optional)</label>
+                <input
+                    type="date"
+                    id="expiration"
+                    name="expiration_date"
+                    value="{{ form.expiration_date.value|default:'' }}"
+                >
+                {% for error in form.expiration_date.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+
+                <label for="photo">Ingredient Photo (Optional)</label>
+                <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                >
+                {% for error in form.photo.errors %}<p class="form-error">{{ error }}</p>{% endfor %}
+                <img id="photo-preview" class="photo-preview" alt="" style="display: none;">
+
+                <input type="hidden" id="barcode" name="barcode" value="{{ form.barcode.value|default:'' }}">
+                <input type="hidden" id="image-url" name="image_url" value="{{ form.image_url.value|default:'' }}">
+
+                <button type="submit">Add Ingredient to Fridge</button>
+
+            </form>
+
+        </div>
+{% endblock %}
+
+{% block scripts %}
+        <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+        <script>
+            const READ_PHOTO_URL = "{% url 'read_barcode_photo' %}";
+            const LOOKUP_URL = "{% url 'lookup_barcode' 'CODE' %}";
+            const CSRF_TOKEN = "{{ csrf_token }}";
+
+            const scanButton = document.getElementById("scan-button");
+            const statusText = document.getElementById("scan-status");
+            const scanner = new Html5Qrcode("camera");
+            let cameraOn = false;
+
+            // Ask the server to look up the barcode and fill in the name
+            function lookUpBarcode(code) {
+                document.getElementById("barcode").value = code;
+                statusText.textContent = "Found barcode " + code + ", looking it up...";
+
+                fetch(LOOKUP_URL.replace("CODE", encodeURIComponent(code)))
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.found) {
+                            document.getElementById("ingredient").value = data.name;
+                            document.getElementById("image-url").value = data.image_url || "";
+                            statusText.textContent = "Found: " + data.name;
+
+                            // Show the product picture if no photo was uploaded
+                            const preview = document.getElementById("photo-preview");
+                            if (data.image_url && !document.getElementById("photo").files.length) {
+                                preview.src = data.image_url;
+                                preview.style.display = "block";
+                            }
+                        } else {
+                            statusText.textContent = "Barcode " + code + " not found. Type the name in below.";
+                        }
+                    })
+                    .catch(() => {
+                        statusText.textContent = "Couldn't look up " + code + ". Type the name in below.";
+                    });
+            }
+
+            function stopCamera() {
+                cameraOn = false;
+                scanButton.textContent = "Scan Barcode";
+                return scanner.stop().catch(() => {});
+            }
+
+            // Scan with the camera
+            scanButton.addEventListener("click", () => {
+                if (cameraOn) {
+                    stopCamera();
+                    statusText.textContent = "Position barcode here";
+                    return;
+                }
+
+                statusText.textContent = "Starting camera...";
+                scanner.start(
+                    { facingMode: "environment" },
+                    { fps: 10, qrbox: { width: 280, height: 160 } },
+                    code => {
+                        stopCamera();
+                        lookUpBarcode(code);
+                    }
+                )
+                .then(() => {
+                    cameraOn = true;
+                    scanButton.textContent = "Stop Camera";
+                    statusText.textContent = "Looking for a barcode...";
+                })
+                .catch(() => {
+                    statusText.textContent = "Couldn't open the camera. Try uploading a photo instead.";
+                });
+            });
+
+            // Scan from an uploaded photo (the server reads it with Python)
+            document.getElementById("barcode-photo").addEventListener("change", event => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                if (cameraOn) stopCamera();
+                statusText.textContent = "Reading the barcode...";
+
+                const data = new FormData();
+                data.append("barcode_photo", file);
+
+                fetch(READ_PHOTO_URL, {
+                    method: "POST",
+                    headers: { "X-CSRFToken": CSRF_TOKEN },
+                    body: data,
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.barcode) {
+                            lookUpBarcode(result.barcode);
+                        } else {
+                            statusText.textContent = result.error;
+                        }
+                    })
+                    .catch(() => {
+                        statusText.textContent = "Something went wrong reading that photo.";
+                    });
+            });
+
+            // Preview the ingredient photo
+            document.getElementById("photo").addEventListener("change", event => {
+                const file = event.target.files[0];
+                const preview = document.getElementById("photo-preview");
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = "block";
+                }
+            });
+        </script>
+{% endblock %}

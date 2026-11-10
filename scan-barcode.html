@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html>
@@ -31,10 +30,18 @@
             <p>Scan a product barcode to add an ingredient to your refrigerator.</p>
 
             <div class="barcode-scanner">
-                <p>Position barcode here</p>
+                <div id="camera"></div>
+                <p id="scan-status">Position barcode here</p>
             </div>
 
-            <button type="button">Scan Barcode</button>
+            <button type="button" id="scan-button">Scan Barcode</button>
+
+            <label for="barcode-photo">Or upload a photo of the barcode</label>
+            <input
+                type="file"
+                id="barcode-photo"
+                accept="image/*"
+            >
 
             <h3>Ingredient Information</h3>
 
@@ -54,6 +61,7 @@
                     id="quantity"
                     name="quantity"
                     min="1"
+                    value="1"
                     required
                 >
 
@@ -64,11 +72,118 @@
                     name="expiration"
                 >
 
+                <label for="photo">Ingredient Photo (Optional)</label>
+                <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    accept="image/*"
+                >
+                <img id="photo-preview" alt="" style="display: none; max-width: 160px; margin-top: 8px;">
+
+                <input type="hidden" id="barcode" name="barcode">
+
                 <button type="submit">Add Ingredient to Fridge</button>
 
             </form>
 
         </div>
+
+        <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+        <script>
+            const scanButton = document.getElementById("scan-button");
+            const statusText = document.getElementById("scan-status");
+            const scanner = new Html5Qrcode("camera");
+            let cameraOn = false;
+
+            // Look up the barcode on Open Food Facts and fill in the name
+            function lookUpBarcode(code) {
+                document.getElementById("barcode").value = code;
+                statusText.textContent = "Found barcode " + code + ", looking it up...";
+
+                fetch("https://world.openfoodfacts.org/api/v2/product/" + code + ".json?fields=product_name,brands,image_front_url")
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 1 && data.product.product_name) {
+                            document.getElementById("ingredient").value = data.product.product_name;
+                            statusText.textContent = "Found: " + data.product.product_name;
+
+                            // Show the product picture if no photo was uploaded
+                            const preview = document.getElementById("photo-preview");
+                            if (data.product.image_front_url && !document.getElementById("photo").files.length) {
+                                preview.src = data.product.image_front_url;
+                                preview.style.display = "block";
+                            }
+                        } else {
+                            statusText.textContent = "Barcode " + code + " not found. Type the name in below.";
+                        }
+                    })
+                    .catch(() => {
+                        statusText.textContent = "Couldn't look up " + code + ". Type the name in below.";
+                    });
+            }
+
+            function stopCamera() {
+                cameraOn = false;
+                scanButton.textContent = "Scan Barcode";
+                return scanner.stop().catch(() => {});
+            }
+
+            // Scan with the camera
+            scanButton.addEventListener("click", () => {
+                if (cameraOn) {
+                    stopCamera();
+                    statusText.textContent = "Position barcode here";
+                    return;
+                }
+
+                statusText.textContent = "Starting camera...";
+                scanner.start(
+                    { facingMode: "environment" },
+                    { fps: 10, qrbox: { width: 280, height: 160 } },
+                    code => {
+                        stopCamera();
+                        lookUpBarcode(code);
+                    }
+                )
+                .then(() => {
+                    cameraOn = true;
+                    scanButton.textContent = "Stop Camera";
+                    statusText.textContent = "Looking for a barcode...";
+                })
+                .catch(() => {
+                    statusText.textContent = "Couldn't open the camera. Try uploading a photo instead.";
+                });
+            });
+
+            // Scan from an uploaded photo
+            document.getElementById("barcode-photo").addEventListener("change", event => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const scanFile = () => scanner.scanFile(file, false)
+                    .then(code => lookUpBarcode(code))
+                    .catch(() => {
+                        statusText.textContent = "Couldn't find a barcode in that photo. Try getting closer.";
+                    });
+
+                if (cameraOn) {
+                    stopCamera().then(scanFile);
+                } else {
+                    scanFile();
+                }
+            });
+
+            // Preview the ingredient photo
+            document.getElementById("photo").addEventListener("change", event => {
+                const file = event.target.files[0];
+                const preview = document.getElementById("photo-preview");
+                if (file) {
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = "block";
+                }
+            });
+        </script>
 
     </body>
 </html>
