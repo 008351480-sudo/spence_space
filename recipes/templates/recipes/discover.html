@@ -10,7 +10,7 @@
     <body>
 
         <header class="site-header">
-            <a href="index.html">
+            <a href="{% url 'my_fridges' %}"></a>
                 <img src="{% static 'recipes/images/Transparent-Logo.png' %}"
                     alt="Spence Space Logo"
                     class="site-logo">
@@ -18,10 +18,10 @@
         </header>
 
         <nav class="navbar">
-            <a href="fridge.html">My Fridges</a>
-            <a href="discover.html">Discover</a>
-            <a href="grocery.html">Grocery List</a>
-            <a href="recipes.html">My Recipes</a>
+            <a href="{% url 'my_fridges' %}">My Fridges</a>
+            <a href="{% url 'discover' %}" class="active">Discover</a>
+            <a href="{% url 'grocery_list' %}">Grocery List</a>
+            <a href="{% url 'my_recipes' %}">My Recipes</a>
         </nav>
 
         <div class="discover-container">
